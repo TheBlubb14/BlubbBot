@@ -124,11 +124,7 @@ namespace BlubbBot.Autorization
                 responseMessage = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             }
 
-            var result = JsonConvert.DeserializeObject<AccessToken>(responseMessage);
-            accessToken.access_token = result.access_token;
-            accessToken.token_type = result.token_type;
-            accessToken.scope = result.scope;
-            accessToken.expires_in = result.expires_in;
+            accessToken = JsonConvert.DeserializeObject<AccessToken>(responseMessage);
 
             this.CalculateExpiration(ref accessToken);
 
